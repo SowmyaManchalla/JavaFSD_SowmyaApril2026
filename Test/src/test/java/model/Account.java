@@ -24,6 +24,15 @@ public class Account {
 		this.name = name;
 		this.balance = balance;
 	}
+	
+	public void withdraw(double amount) throws Exception
+	{
+		if(balance<amount)
+		{
+			throw new Exception("Insufficient balance");
+		}
+		balance-=amount;
+	}
 
 
 	public int getAccNo() {

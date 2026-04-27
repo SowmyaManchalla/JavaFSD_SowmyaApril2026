@@ -8,6 +8,7 @@ abstract class Account {
 		protected double balance;
 		private Person accHolder;
 		
+		
 		public Account(int accNum,Person accHolder, double balance)
 		{
 			this.accNum=accNum;
@@ -15,11 +16,13 @@ abstract class Account {
 			this.balance=balance;
 		}
 		
+	
 		public void deposit(double amount)
 		{
 			balance=balance+amount;
 		}
 		
+	
 		public void withdraw(double amount)
 		{
 			if(balance-amount>=500)
@@ -32,6 +35,7 @@ abstract class Account {
 			}
 		}
 		
+	
 		public double getBalance()
 		{
 			return balance;

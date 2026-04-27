@@ -1,6 +1,8 @@
 package service;
 
 import model.Account;
+import exception1.InvalidAmountException;
+import exception1.AccountNotFoundException;
 
 public class BankService implements BankOperation {
 	
@@ -20,9 +22,28 @@ public class BankService implements BankOperation {
 		}
 	}
 	
+	private Account findAccount(int accNo) throws AccountNotFoundException
+	{
+		for(int i=0;i<count;i++)
+		{
+			if(accounts[i].getAccNo()==accNo) {
+				return accounts[i];
+			}
+		}
+		throw new AccountNotFoundException("Account not found");
+		
+	}
+ 
+	
 	@Override
 	public void deposit(int accNo,double amount)
 	{
+		try
+		{
+			if(amount<0)
+			{
+				throw new InvalidAmountException("Invalid deposit amount");
+			}
 		for(int i=0;i<count;i++)
 		{
 			if(accounts[i].getAccNo()==accNo)
@@ -32,13 +53,24 @@ public class BankService implements BankOperation {
 				return;
 			}
 		}
-	}
+		}
 	
+		catch(Exception e)
+		{
+			System.out.println("InvalidAmountExeption"+e.getMessage());
+		}
+	}
 
 
 	@Override
 	public void withdraw(int accNo,double amount)
 	{
+		try
+		{
+			if(amount<0)
+			{
+				throw new InvalidAmountException("Invalid withdraw amount");
+			}
 		for(int i=0;i<count;i++)
 		{
 			if(accounts[i].getAccNo()==accNo)
@@ -55,7 +87,13 @@ public class BankService implements BankOperation {
 				}
 			}
 		}
-	}
+		}
+		catch(Exception e)
+		{
+			System.out.println("InvalidAmountExeption"+e.getMessage());
+		}
+
+}
 	@Override
 	public void checkbalance(int accNo)
 	{

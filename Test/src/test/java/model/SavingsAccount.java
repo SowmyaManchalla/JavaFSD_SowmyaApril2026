@@ -1,5 +1,7 @@
 package model;
 
+import exception1.InsufficientBalanceException;
+
 //inheritance and polymorphism
 
 public class SavingsAccount extends Account{
@@ -13,7 +15,7 @@ public class SavingsAccount extends Account{
 	
 	//Method overriding 
 	
-	public void withdraw(double amount)
+	/*public void withdraw(double amount)
 	{
 		if(getBalance()-amount>=MIN_BALANCE)
 		{
@@ -25,6 +27,14 @@ public class SavingsAccount extends Account{
 		{
 			System.out.println("Minimum balance required");
 		}
-	}
+	}*/
+	public void withdraw(double amount) throws InsufficientBalanceException
+	{
+		if(getBalance()-amount<MIN_BALANCE)
+		{
+			throw new InsufficientBalanceException("Maintain minimum balance of 500");
+		}
+		setBalance(getBalance()-amount);
+		}
 
 }

@@ -1,17 +1,21 @@
 package model;
 
+import exception1.InsufficientBalanceException;
+
 public class CurrentAccount extends Account{
 	
-	public CurrentAccount(int accNo,String name, double balance)
+	private static final double OVERDRAFT_LIMIT=1000;
+	
+	public CurrentAccount(int accNo,String name,double balance)
 	{
 		super(accNo,name,balance);
 	}
-
-	
-	public void displayAccount()
+	public void withdraw(double amount) throws InsufficientBalanceException
 	{
-		System.out.println(getAccNo()+" "+
-	                       getName()+" "+
-				           getBalance()+"(Current Account)");
+		if(getBalance()+OVERDRAFT_LIMIT<amount)
+		{
+			throw new InsufficientBalanceException("overdraft limit exceeded");
+		}
+		setBalance(getBalance()-amount);
 	}
 }
